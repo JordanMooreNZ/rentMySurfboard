@@ -62,6 +62,11 @@ class SurfboardsController < ApplicationController
     end
   end
 
+  def my_boards
+    @surfboards = SurfboardPolicy::Scope.new(current_user, Surfboard).my_boards.order(created_at: :desc)
+    raise
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_surfboard

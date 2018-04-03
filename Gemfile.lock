@@ -215,7 +215,7 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails
   bootstrap-sass (~> 3.3)
-  carrierwave (~> 1.2)
+  carrierwave
   cloudinary
   devise
   faker

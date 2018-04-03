@@ -2,6 +2,15 @@ class SurfboardPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope.where(available: true)
+      # if user.admin?
+      #   scope.all
+      # else
+      #   scope.where(available: true)
+      # end
+    end
+
+    def my_boards
+      scope.where(user: user)
     end
   end
 

@@ -1,6 +1,7 @@
 class Surfboard < ApplicationRecord
   belongs_to :beach
   belongs_to :user
+  has_many :bookings
 
   mount_uploader :photo, PhotoUploader
 
@@ -13,6 +14,12 @@ class Surfboard < ApplicationRecord
     funboard: "Funboard",
     foamboard: "Foamboard",
     sup: "SUP",
-    board_skimmer: "Board Skimmer",
+    board_skimmer: "Board Skimmer"
   }
+
+  private
+
+  def cancel_bookings
+    self.bookings.each { |booking| booking.update(status: :cancelled) }
+  end
 end
