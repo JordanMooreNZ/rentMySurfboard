@@ -26,9 +26,9 @@ ActiveRecord::Schema.define(version: 20180402075116) do
   create_table "bookings", force: :cascade do |t|
     t.bigint "surfboard_id"
     t.bigint "user_id"
-    t.integer "duration"
+    t.string "duration"
     t.datetime "rented_at"
-    t.integer "status"
+    t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["surfboard_id"], name: "index_bookings_on_surfboard_id"
@@ -43,14 +43,10 @@ ActiveRecord::Schema.define(version: 20180402075116) do
     t.text "price_hash"
     t.string "address"
     t.bigint "user_id"
-    t.integer "board_type"
+    t.string "board_type"
     t.boolean "available"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "first_name"
-    t.string "last_name"
-    t.string "profile_photo"
-    t.string "mobile"
     t.index ["beach_id"], name: "index_surfboards_on_beach_id"
     t.index ["user_id"], name: "index_surfboards_on_user_id"
   end
@@ -68,6 +64,11 @@ ActiveRecord::Schema.define(version: 20180402075116) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "profile_photo"
+    t.string "description"
+    t.string "mobile"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

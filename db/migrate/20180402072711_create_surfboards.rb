@@ -8,7 +8,7 @@ class CreateSurfboards < ActiveRecord::Migration[5.1]
       t.text :price_hash
       t.string :address
       t.references :user, foreign_key: true
-      t.integer :board_type
+      t.string :board_type
       t.boolean :available
 
       t.timestamps
