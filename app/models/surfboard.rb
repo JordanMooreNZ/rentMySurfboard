@@ -2,6 +2,8 @@ class Surfboard < ApplicationRecord
   belongs_to :beach
   belongs_to :user
 
+  mount_uploader :photo, PhotoUploader
+
   enum board_type: {
     shortboard: "Shortboard",
     fish: "Fish",
