@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Photo:</strong>
+  <%= @surfboard.photo %>
+</p>
+
+<p>
+  <strong>Beach:</strong>
+  <%= @surfboard.beach %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @surfboard.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @surfboard.description %>
+</p>
+
+<p>
+  <strong>Price hash:</strong>
+  <%= @surfboard.price_hash %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @surfboard.address %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @surfboard.user %>
+</p>
+
+<p>
+  <strong>Board type:</strong>
+  <%= @surfboard.board_type %>
+</p>
+
+<p>
+  <strong>Available:</strong>
+  <%= @surfboard.available %>
+</p>
+
+<%= link_to 'Edit', edit_surfboard_path(@surfboard) %> |
+<%= link_to 'Back', surfboards_path %>
