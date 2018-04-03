@@ -4,7 +4,7 @@ class SurfboardsController < ApplicationController
   # GET /surfboards
   # GET /surfboards.json
   def index
-    @surfboards = Surfboard.all
+    @surfboards = policy_scope(Surfboard).order(created_at: :desc)
   end
 
   # GET /surfboards/1
@@ -24,6 +24,7 @@ class SurfboardsController < ApplicationController
   # POST /surfboards
   # POST /surfboards.json
   def create
+    authorize @surfboard
     @surfboard = Surfboard.new(surfboard_params)
 
     respond_to do |format|
@@ -65,6 +66,7 @@ class SurfboardsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_surfboard
       @surfboard = Surfboard.find(params[:id])
+      authorize @surfboard
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

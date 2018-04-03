@@ -30,9 +30,15 @@
         <td><%= surfboard.user %></td>
         <td><%= surfboard.board_type %></td>
         <td><%= surfboard.available %></td>
-        <td><%= link_to 'Show', surfboard %></td>
-        <td><%= link_to 'Edit', edit_surfboard_path(surfboard) %></td>
-        <td><%= link_to 'Destroy', surfboard, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if policy(surfboard).edit? %>
+          <td><%= link_to 'Show', surfboard %></td>
+        <% end %>
+        <% if policy(surfboard).edit? %>
+          <td><%= link_to 'Edit', edit_surfboard_path(surfboard) %></td>
+        <% end %>
+        <% if policy(surfboard).edit? %>
+          <td><%= link_to 'Destroy', surfboard, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -40,4 +46,8 @@
 
 <br>
 
-<%= link_to 'New Surfboard', new_surfboard_path %>
+
+<% if policy(Surfboard).create? %>
+  <%= link_to 'New Surfboard', new_surfboard_path %>
+<% end %>
+
