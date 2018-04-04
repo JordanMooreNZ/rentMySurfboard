@@ -2,11 +2,40 @@
 
 <p id="notice"><%= notice %></p>
 <div class="container">
-<h1>Surfboards</h1>
-
-<%= render "shared/card" %>
+  <div class="row">
+    <% @filters.each do |_id, filter| %>
+    <div class="col-md-1">
+      <span class="badge badge-pill badge-primary"><%= filter %>  <i class="fas fa-times"></i></span>
+    </div>
+    <% end %>
+  </div>
 </div>
-<table>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+    <h1>Surfboards</h1>
+    <% if policy(Surfboard).create? %>
+        <%= link_to 'New Surfboard +', new_surfboard_path %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <% @surfboards.each do |surfboard| %>
+    <div class="col-md-3">
+      <%= render "shared/card", surfboard: surfboard%>
+    </div>
+    <% end %>
+
+  </div>
+</div>
+
+
+
+<!-- table>
   <thead>
     <tr>
       <th>Photo</th>
@@ -46,12 +75,5 @@
       </tr>
     <% end %>
   </tbody>
-</table>
-
-<br>
-
-
-<% if policy(Surfboard).create? %>
-  <%= link_to 'New Surfboard', new_surfboard_path %>
-<% end %>
+</table> -->
 

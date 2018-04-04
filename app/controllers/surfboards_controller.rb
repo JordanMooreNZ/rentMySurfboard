@@ -4,6 +4,8 @@ class SurfboardsController < ApplicationController
   # GET /surfboards
   # GET /surfboards.json
   def index
+    @beaches = Beach.all
+    @filters = params[:filters]
     @surfboards = policy_scope(Surfboard).order(created_at: :desc)
   end
 
@@ -14,7 +16,9 @@ class SurfboardsController < ApplicationController
 
   # GET /surfboards/new
   def new
+    @current_user = current_user
     @surfboard = Surfboard.new
+    authorize @surfboard
   end
 
   # GET /surfboards/1/edit
@@ -24,8 +28,8 @@ class SurfboardsController < ApplicationController
   # POST /surfboards
   # POST /surfboards.json
   def create
-    authorize @surfboard
     @surfboard = Surfboard.new(surfboard_params)
+    authorize @surfboard
 
     respond_to do |format|
       if @surfboard.save
@@ -64,7 +68,6 @@ class SurfboardsController < ApplicationController
 
   def my_boards
     @surfboards = SurfboardPolicy::Scope.new(current_user, Surfboard).my_boards.order(created_at: :desc)
-    raise
   end
 
   private
