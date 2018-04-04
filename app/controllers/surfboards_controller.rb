@@ -5,6 +5,14 @@ class SurfboardsController < ApplicationController
   # GET /surfboards.json
   def index
     @surfboards = policy_scope(Surfboard).order(created_at: :desc)
+    @surfboards = Surfboard.where.not(latitude: nil, longitude: nil)
+
+    @markers = @surfboards.map do |surfboard|
+      {
+        lat: surfboard.latitude,
+        lng: surfboard.longitude
+      }
+    end
   end
 
   # GET /surfboards/1
@@ -15,6 +23,7 @@ class SurfboardsController < ApplicationController
   # GET /surfboards/new
   def new
     @surfboard = Surfboard.new
+    authorize @surfboard
   end
 
   # GET /surfboards/1/edit
@@ -24,8 +33,8 @@ class SurfboardsController < ApplicationController
   # POST /surfboards
   # POST /surfboards.json
   def create
-    authorize @surfboard
     @surfboard = Surfboard.new(surfboard_params)
+    authorize @surfboard
 
     respond_to do |format|
       if @surfboard.save

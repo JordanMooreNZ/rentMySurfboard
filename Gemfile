@@ -12,6 +12,8 @@ gem 'redis'
 gem 'faker'
 gem 'carrierwave'
 gem 'cloudinary'
+gem "geocoder"
+
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3'
