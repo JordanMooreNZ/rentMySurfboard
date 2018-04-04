@@ -55,6 +55,16 @@ beaches = [
   }
 ]
 
+addresses = [
+  '3 Doris St, North Sydney, NSW 2060',
+  '161 Sussex St, Sydney, NSW 2001',
+  '14 The Avenue, North Sydney, NSW 2060',
+  '38 Simpson St, Bondi Beach, NSW 2026',
+  '50 Park St, Sydney, NSW 2000',
+  '123 Sussex St, Sydney, NSW 2001',
+  '55 King St, Sydney, NSW 2001'
+]
+
 beaches.each { |beach| Beach.create!(beach)}
 
 10.times do
@@ -105,7 +115,7 @@ surfboard_photos.each do |x|
     name: Faker::BackToTheFuture.character,
     description: Faker::SiliconValley.motto,
     price_hash: price_hash,
-    address: Faker::Address.street_address,
+    address:  addresses.sample,
     user: userz.sample,
     board_type: Surfboard.board_types.keys.sample,
     available: true

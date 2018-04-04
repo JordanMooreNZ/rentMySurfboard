@@ -7,6 +7,14 @@ class SurfboardsController < ApplicationController
     @beaches = Beach.all
     @filters = params[:filters]
     @surfboards = policy_scope(Surfboard).order(created_at: :desc)
+    @surfboards = Surfboard.where.not(latitude: nil, longitude: nil)
+
+    @markers = @surfboards.map do |surfboard|
+      {
+        lat: surfboard.latitude,
+        lng: surfboard.longitude
+      }
+    end
   end
 
   # GET /surfboards/1

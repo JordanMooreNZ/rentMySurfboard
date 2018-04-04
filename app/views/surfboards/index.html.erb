@@ -1,4 +1,4 @@
-<%= render "shared/banner_half" %>
+  <%= render "shared/banner_half" %>
 
 <p id="notice"><%= notice %></p>
 <div class="container">
@@ -9,6 +9,9 @@
     </div>
     <% end %>
   </div>
+</div>
+
+<div id="map" style="width: 100%; height: 600px;" data-markers="<%= @markers.to_json %>">
 </div>
 
 <div class="container">
@@ -29,51 +32,5 @@
       <%= render "shared/card", surfboard: surfboard%>
     </div>
     <% end %>
-
   </div>
 </div>
-
-
-
-<!-- table>
-  <thead>
-    <tr>
-      <th>Photo</th>
-      <th>Beach</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Price hash</th>
-      <th>Address</th>
-      <th>User</th>
-      <th>Board type</th>
-      <th>Available</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @surfboards.each do |surfboard| %>
-      <tr>
-        <td><%= surfboard.photo %></td>
-        <td><%= surfboard.beach %></td>
-        <td><%= surfboard.name %></td>
-        <td><%= surfboard.description %></td>
-        <td><%= surfboard.price_hash %></td>
-        <td><%= surfboard.address %></td>
-        <td><%= surfboard.user %></td>
-        <td><%= surfboard.board_type %></td>
-        <td><%= surfboard.available %></td>
-        <% if policy(surfboard).edit? %>
-          <td><%= link_to 'Show', surfboard %></td>
-        <% end %>
-        <% if policy(surfboard).edit? %>
-          <td><%= link_to 'Edit', edit_surfboard_path(surfboard) %></td>
-        <% end %>
-        <% if policy(surfboard).edit? %>
-          <td><%= link_to 'Destroy', surfboard, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table> -->
-
