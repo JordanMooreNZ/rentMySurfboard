@@ -85,6 +85,19 @@ beaches.each { |beach| Beach.create!(beach)}
   User.create!(user)
 end
 
+test_user = {
+  first_name: "John",
+  last_name: "Doe",
+  email: "test@test.com",
+  password: "password",
+  password_confirmation: "password",
+  # profile_photo: user_hash["picture"]["large"],
+  description: Faker::MostInterestingManInTheWorld.quote,
+  # mobile: user_hash["cell"]
+}
+
+User.create!(test_user)
+
 surfboard_photos = [
   'https://www.surfstitch.com/dw/image/v2/BBCN_PRD/on/demandware.static/-/Sites-ss-master-catalog/default/dwace98d75/images/JSMBHFBKWHI/BLACK-WHITE-SURF-SURFBOARDS-JS-INDUSTRIES-PERFORMANCE-JSMBHFBKWHI_1.JPG?sw=263&sh=329&sm=fit',
   'https://www.surfstitch.com/dw/image/v2/BBCN_PRD/on/demandware.static/-/Sites-ss-master-catalog/default/dw60e149f4/images/CHIILLICHCLEAR/CLEAR-SURF-SURFBOARDS-CHILLI-PERFORMANCE-CHIILLICHCLEAR_1.JPG?sw=263&sh=329&sm=fit',
@@ -101,7 +114,7 @@ surfboard_photos = [
 beachez = Beach.all
 userz = User.all
 
-surfboard_photos.each do |x|
+surfboard_photos.each do |photo|
   random_number = 20
 
   price_hash = Booking.durations.inject({}) do |res, (key, _label)|
@@ -110,7 +123,7 @@ surfboard_photos.each do |x|
   end
 
   surfboard_hash = {
-    photo: x,
+    # photo: photo,
     beach: beachez.sample,
     name: Faker::BackToTheFuture.character,
     description: Faker::SiliconValley.motto,
@@ -120,7 +133,10 @@ surfboard_photos.each do |x|
     board_type: Surfboard.board_types.keys.sample,
     available: true
   }
-  Surfboard.create!(surfboard_hash)
+
+  surfboard = Surfboard.new(surfboard_hash)
+  surfboard.remote_photo_url = photo
+  surfboard.save!
 end
 
 surfboardz = Surfboard.all

@@ -3,10 +3,12 @@
 <p id="notice"><%= notice %></p>
 <div class="container">
   <div class="row">
-    <% @filters.each do |_id, filter| %>
-    <div class="col-md-1">
-      <span class="badge badge-pill badge-primary"><%= filter %>  <i class="fas fa-times"></i></span>
-    </div>
+    <% if !!@filters %>
+      <% @filters.each do |_id, filter| %>
+      <div class="col-md-1">
+        <span class="badge badge-pill badge-primary"><%= filter %>  <i class="fas fa-times"></i></span>
+      </div>
+      <% end %>
     <% end %>
   </div>
 </div>

@@ -5,10 +5,15 @@
     <%= f.association :beach %>
     <%= f.input :name %>
     <%= f.input :description %>
-    <%= f.input :price_hash %>
+    <%= f.simple_fields_for :price_hash, OpenStruct.new(@surfboard.price_hash) do |ff| %>
+      <% Booking.durations.keys.each do |duration| %>
+        <%= ff.input duration.to_sym %>
+      <% end %>
+    <% end %>
+    <!-- <%= f.input :price_hash %> -->
     <%= f.input :address %>
-    <%= f.association :user, :as => :hidden, :input_html => { :value => @current_user } %>
-    <%= f.input :board_type %>
+    <%= f.association :user, :as => :hidden, :input_html => { :value => @current_user.id } %>
+    <%= f.input :board_type, collection: Surfboard.board_types %>
     <%= f.input :available %>
   </div>
 
@@ -16,3 +21,8 @@
     <%= f.button :submit %>
   </div>
 <% end %>
+
+<!-- <form action="">
+  <input type="text" name="price_hash[one_hour]">
+  <input type="text" name="price_hash[four_hours]">
+</form> -->

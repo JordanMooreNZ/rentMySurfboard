@@ -29,7 +29,7 @@ class SurfboardPolicy < ApplicationPolicy
   end
 
   def show?
-    @surfboard.available || record.user == user
+    record.available || record.user == user
   end
 
   def edit?

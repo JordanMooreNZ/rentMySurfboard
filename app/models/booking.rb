@@ -7,6 +7,7 @@ class Booking < ApplicationRecord
     four_hours: "Four Hours",
     one_day: "One Day",
     one_week: "One Week",
+    one_month: "One Month"
   }
 
   enum status: {
