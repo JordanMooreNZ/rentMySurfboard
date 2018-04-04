@@ -2,60 +2,35 @@
 
 <p id="notice"><%= notice %></p>
 <div class="container">
-<h1>Surfboards</h1>
-
-<%= render "shared/card" %>
+  <div class="row">
+    <% @filters.each do |_id, filter| %>
+    <div class="col-md-1">
+      <span class="badge badge-pill badge-primary"><%= filter %>  <i class="fas fa-times"></i></span>
+    </div>
+    <% end %>
+  </div>
+</div>
 
 <div id="map" style="width: 100%; height: 600px;" data-markers="<%= @markers.to_json %>">
 </div>
 
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+    <h1>Surfboards</h1>
+    <% if policy(Surfboard).create? %>
+        <%= link_to 'New Surfboard +', new_surfboard_path %>
+      <% end %>
+    </div>
+  </div>
 </div>
-<table>
-  <thead>
-    <tr>
-      <th>Photo</th>
-      <th>Beach</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Price hash</th>
-      <th>Address</th>
-      <th>User</th>
-      <th>Board type</th>
-      <th>Available</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
+<div class="container">
+  <div class="row">
     <% @surfboards.each do |surfboard| %>
-      <tr>
-        <td><%= surfboard.photo %></td>
-        <td><%= surfboard.beach %></td>
-        <td><%= surfboard.name %></td>
-        <td><%= surfboard.description %></td>
-        <td><%= surfboard.price_hash %></td>
-        <td><%= surfboard.address %></td>
-        <td><%= surfboard.user %></td>
-        <td><%= surfboard.board_type %></td>
-        <td><%= surfboard.available %></td>
-        <% if policy(surfboard).edit? %>
-          <td><%= link_to 'Show', surfboard %></td>
-        <% end %>
-        <% if policy(surfboard).edit? %>
-          <td><%= link_to 'Edit', edit_surfboard_path(surfboard) %></td>
-        <% end %>
-        <% if policy(surfboard).edit? %>
-          <td><%= link_to 'Destroy', surfboard, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
+    <div class="col-md-3">
+      <%= render "shared/card", surfboard: surfboard%>
+    </div>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-
-<% if policy(Surfboard).create? %>
-  <%= link_to 'New Surfboard', new_surfboard_path %>
-<% end %>
-
+  </div>
+</div>

@@ -4,6 +4,8 @@ class SurfboardsController < ApplicationController
   # GET /surfboards
   # GET /surfboards.json
   def index
+    @beaches = Beach.all
+    @filters = params[:filters]
     @surfboards = policy_scope(Surfboard).order(created_at: :desc)
     @surfboards = Surfboard.where.not(latitude: nil, longitude: nil)
 
@@ -22,6 +24,7 @@ class SurfboardsController < ApplicationController
 
   # GET /surfboards/new
   def new
+    @current_user = current_user
     @surfboard = Surfboard.new
     authorize @surfboard
   end
@@ -73,7 +76,6 @@ class SurfboardsController < ApplicationController
 
   def my_boards
     @surfboards = SurfboardPolicy::Scope.new(current_user, Surfboard).my_boards.order(created_at: :desc)
-    raise
   end
 
   private
