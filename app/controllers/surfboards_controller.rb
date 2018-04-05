@@ -7,7 +7,6 @@ class SurfboardsController < ApplicationController
     @beaches = Beach.all
     @filters = params[:filters]
     @surfboards = policy_scope(Surfboard).order(created_at: :desc)
-    @surfboards = Surfboard.where.not(latitude: nil, longitude: nil)
 
     @markers = @surfboards.map do |surfboard|
       {
@@ -82,19 +81,19 @@ class SurfboardsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_surfboard
-      @surfboard = Surfboard.find(params[:id])
-      authorize @surfboard
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_surfboard
+    @surfboard = Surfboard.find(params[:id])
+    authorize @surfboard
+  end
 
-    def permit_durations
-      params.require(:surfboard).require(:price_hash).permit(Booking.durations.keys.map{ |e| e.to_sym })
-    end
-    # @full_params = [:photo, :beach_id, :beach, :name, :price_hash, :description, :address, :user_id, :board_type, :available]
+  def permit_durations
+    params.require(:surfboard).require(:price_hash).permit(Booking.durations.keys.map{ |e| e.to_sym })
+  end
+  # @full_params = [:photo, :beach_id, :beach, :name, :price_hash, :description, :address, :user_id, :board_type, :available]
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def surfboard_params
-      params.require(:surfboard).permit(:photo, :beach_id, :name, :price_hash, :description, :address, :user_id, :board_type, :available)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def surfboard_params
+    params.require(:surfboard).permit(:photo, :beach_id, :name, :price_hash, :description, :address, :user_id, :board_type, :available)
+  end
 end

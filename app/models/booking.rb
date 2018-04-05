@@ -6,13 +6,13 @@ class Booking < ApplicationRecord
     one_hour: "One Hour",
     four_hours: "Four Hours",
     one_day: "One Day",
-    one_week: "One Week",
-    one_month: "One Month"
+    two_days: "Two Days",
+    one_week: "One Week"
   }
 
   enum status: {
-    confirmed: "Confirmed",
     pending: "Pending",
+    confirmed: "Confirmed",
     declined: "Declined",
     cancelled: "Cancelled"
   }
