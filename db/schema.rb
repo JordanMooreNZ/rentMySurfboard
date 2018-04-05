@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180404010153) do
+ActiveRecord::Schema.define(version: 20180405051544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 20180404010153) do
     t.bigint "surfboard_id"
     t.bigint "user_id"
     t.string "duration"
-    t.datetime "rented_at"
-    t.string "status"
+    t.date "rented_on"
+    t.string "status", default: "Pending"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["surfboard_id"], name: "index_bookings_on_surfboard_id"

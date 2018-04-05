@@ -55,7 +55,7 @@ beaches = [
   }
 ]
 
-addresses = [
+@addresses = [
   '3 Doris St, North Sydney, NSW 2060',
   '161 Sussex St, Sydney, NSW 2001',
   '14 The Avenue, North Sydney, NSW 2060',
@@ -85,20 +85,7 @@ beaches.each { |beach| Beach.create!(beach)}
   User.create!(user)
 end
 
-test_user = {
-  first_name: "John",
-  last_name: "Doe",
-  email: "test@test.com",
-  password: "password",
-  password_confirmation: "password",
-  # profile_photo: user_hash["picture"]["large"],
-  description: Faker::MostInterestingManInTheWorld.quote,
-  # mobile: user_hash["cell"]
-}
-
-User.create!(test_user)
-
-surfboard_photos = [
+@surfboard_photos = [
   'https://www.surfstitch.com/dw/image/v2/BBCN_PRD/on/demandware.static/-/Sites-ss-master-catalog/default/dwace98d75/images/JSMBHFBKWHI/BLACK-WHITE-SURF-SURFBOARDS-JS-INDUSTRIES-PERFORMANCE-JSMBHFBKWHI_1.JPG?sw=263&sh=329&sm=fit',
   'https://www.surfstitch.com/dw/image/v2/BBCN_PRD/on/demandware.static/-/Sites-ss-master-catalog/default/dw60e149f4/images/CHIILLICHCLEAR/CLEAR-SURF-SURFBOARDS-CHILLI-PERFORMANCE-CHIILLICHCLEAR_1.JPG?sw=263&sh=329&sm=fit',
   'https://www.surfstitch.com/dw/image/v2/BBCN_PRD/on/demandware.static/-/Sites-ss-master-catalog/default/dwf026132c/images/HS-HYPTOFFV-0504-GRY/GREY-SURF-SURFBOARDS-HAYDENSHAPES-GSI-MID-LENGTH-HS-HYPTOFFV-0504-GRY_1.JPG?sw=263&sh=329&sm=fit',
@@ -114,7 +101,7 @@ surfboard_photos = [
 beachez = Beach.all
 userz = User.all
 
-surfboard_photos.each do |photo|
+@surfboard_photos.each do |photo|
   random_number = 20
 
   price_hash = Booking.durations.inject({}) do |res, (key, _label)|
@@ -128,7 +115,7 @@ surfboard_photos.each do |photo|
     name: Faker::BackToTheFuture.character,
     description: Faker::SiliconValley.motto,
     price_hash: price_hash,
-    address:  addresses.sample,
+    address:  @addresses.sample,
     user: userz.sample,
     board_type: Surfboard.board_types.keys.sample,
     available: true
@@ -139,18 +126,77 @@ surfboard_photos.each do |photo|
   surfboard.save!
 end
 
-surfboardz = Surfboard.all
+@surfboardz = Surfboard.all
 
 10.times do
 
 booking_hash = [{
-  surfboard: surfboardz.sample,
+  surfboard: @surfboardz.sample,
   user: userz.sample,
   duration: Booking.durations.keys.sample,
-  rented_at: Date.today + rand(1..5),
+  rented_on: Date.today + rand(1..5),
   status: Booking.statuses.keys.sample
   }]
 
 Booking.create!(booking_hash)
 
 end
+
+
+# test user, booking and board
+test_user_hash = {
+  first_name: "John",
+  last_name: "Doe",
+  email: "test@test.com",
+  password: "password",
+  password_confirmation: "password",
+  # profile_photo: user_hash["picture"]["large"],
+  description: Faker::MostInterestingManInTheWorld.quote,
+  # mobile: user_hash["cell"]
+}
+
+test_user = User.create!(test_user_hash)
+
+random_number = 20
+
+price_hash = Booking.durations.inject({}) do |res, (key, _label)|
+  random_number += rand(10..20)
+  res[key] = random_number ; res
+end
+
+test_board_hash = {
+  # photo: photo,
+  beach: Beach.all.sample,
+  name: Faker::BackToTheFuture.character,
+  description: Faker::SiliconValley.motto,
+  price_hash: price_hash,
+  address:  @addresses.sample,
+  user: test_user,
+  board_type: Surfboard.board_types.keys.sample,
+  available: true
+}
+
+test_board = Surfboard.new(test_board_hash)
+test_board.remote_photo_url = @surfboard_photos.sample
+test_board.save!
+
+test_booking_renting = [{
+  surfboard: @surfboardz.sample,
+  user: test_user,
+  duration: Booking.durations.keys.sample,
+  rented_on: Date.today + rand(1..5),
+  status: Booking.statuses.keys.sample
+  }]
+
+Booking.create!(test_booking_renting)
+
+test_booking_rented = [{
+  surfboard: test_board,
+  user: User.all.sample,
+  duration: Booking.durations.keys.sample,
+  rented_on: Date.today + rand(1..5),
+  status: Booking.statuses.keys.sample
+  }]
+
+Booking.create!(test_booking_rented)
+
