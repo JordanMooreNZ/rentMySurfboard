@@ -1,0 +1,28 @@
+.flexcontainer {
+  display: flex;
+}
+
+.cards-container {
+  flex: 1 0 75%;
+}
+
+#map {
+  height: 100vh;
+  flex: 0 0 25%;
+  position: sticky !important;
+  top: 0 !important;
+ /* default 0 */
+   /* Or whatever */
+ }
+
+ .grey {
+  background-color: #fcfcfc;
+  width: 100%;
+  height: 100%;
+ }
+
+@media (max-width: 1000px) {
+#map {
+display:none;
+}
+}
