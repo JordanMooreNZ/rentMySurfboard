@@ -1,7 +1,7 @@
 class SurfboardPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.where(available: true).or(scope.where.not(latitude: nil, longitude: nil))
+      scope.where(available: true).where.not(latitude: nil, longitude: nil)
       # if user.admin?
       #   scope.all
       # else
