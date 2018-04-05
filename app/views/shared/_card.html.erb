@@ -4,5 +4,40 @@
     <h2><%= surfboard.board_type.capitalize %></h2>
     <p><%= surfboard.name %></p>
   </div>
-  <a class="card-link" href="#" ></a>
+  <div class="card-modal">
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#surfboard_modal_<%= surfboard.id %>">
+  View
+</button>
+</div>
+</div>
+
+<div class="modal fade" id="surfboard_modal_<%= surfboard.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= surfboard.photo %>);">
+          <div class="card-category"></div>
+          <div class="card-description">
+            <h2><%= surfboard.board_type.capitalize %></h2>
+          </div>
+          <div class="card-modal">
+        </div>
+        </div>
+        <strong><h3><%= surfboard.name %></h3></strong>
+        $<%= surfboard.price_hash["four_hours"] %> for Four Hours<br>
+        <p><strong>Description:</strong></p><p>  <%= surfboard.description %>.</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Book Now!</button>
+      </div>
+    </div>
+  </div>
 </div>
