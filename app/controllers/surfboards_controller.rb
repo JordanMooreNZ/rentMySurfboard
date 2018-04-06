@@ -6,7 +6,7 @@ class SurfboardsController < ApplicationController
   def index
     @beaches = Beach.all
     @surfboards = Surfboard.where(nil)
-    @surfboards = @surfboards.where(beach_id: params[:filters][:beach]) if params[:filters][:beach]
+    @surfboards = @surfboards.where(beach_id: params[:filters][:beach]) if !!params[:filters][:beach]
     @surfboards = policy_scope(@surfboards).order(created_at: :desc)
 
     @markers = @surfboards.map do |surfboard|
