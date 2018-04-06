@@ -1,0 +1,28 @@
+<div class="booking">
+  <img class="avatar-large" src="<%= booking.surfboard.photo %>">
+  <div class="booking-name">
+    <h3><%= booking.user.first_name + " " + booking.user.last_name %></h3>
+    <p><%= booking.rented_on %></p>
+  </div>
+  <div class="booking-body">
+    <p><strong>Address:</strong><%=  booking.surfboard.address %></p>
+    <p><strong>Mobile:</strong><%=  booking.surfboard.user.mobile %></p>
+  </div>
+  <div class="booking-status">
+    <p class="status <%= booking.status %> "><%= Booking.statuses[booking.status] %></p>
+    <p class="price">$ <%=  booking.surfboard.price_hash[booking.duration] %></p>
+  </div>
+</div>
+
+<!-- <p><%= booking.surfboard.user.email %></p>
+<p><%= booking.duration %></p>
+<%= simple_form_for([booking.surfboard, booking]) do |f| %>
+  <%= f.error_notification %>
+  <div class="form-inputs">
+    <%= f.input :status, collection: Booking.statuses.invert, include_blank: false %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+  <br>
+<% end %> -->
