@@ -2,22 +2,6 @@
   <div class="banner-content">
     <h1>Here are your Results, Dude!</h1>
     <p>Hope we were Hella Helpful Here, if not give it another Search broskie!</p>
-
-    <form action="/surfboards" method="get" class="form-inline">
-
-      <div class="form-group">
-        <select class="form-control" name="beach" id="exampleFormControlSelect1">
-          <% @beaches.each do |beach| %>
-            <option><%= beach.name %></option>
-          <% end %>
-        </select>
-      </div>
-      <div class="form-group">
-       <input type="date" name="surf-date" max="3000-12-31"
-              min="1000-01-01" class="form-control">
-      </div>
-
-      <input type="submit" class="btn btn-primary">
-    </form>
+    <%= render 'shared/search_form' %>
   </div>
 </div>

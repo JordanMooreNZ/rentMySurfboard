@@ -10,8 +10,14 @@
     <%#= stylesheet_pack_tag 'application', media: 'all' %> <!-- Uncomment if you import CSS in app/javascript/packs/application.js -->
   </head>
   <body>
-    <%= render "shared/navbar" %>
+    <% if !!current_user %>
+      <%= render "shared/navbar_signed_in" %>
+    <% else %>
+      <%= render "shared/navbar_not_signed_in" %>
+    <% end %>
+
     <%= yield %>
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= render "shared/footer" %>
