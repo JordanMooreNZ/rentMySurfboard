@@ -12,6 +12,7 @@ require 'open-uri'
 
 url = 'https://randomuser.me/api/'
 
+puts "Clearing database..."
 Booking.destroy_all
 Surfboard.destroy_all
 User.destroy_all
@@ -65,8 +66,10 @@ beaches = [
   '55 King St, Sydney, NSW 2001'
 ]
 
+puts "Creating beaches..."
 beaches.each { |beach| Beach.create!(beach)}
 
+puts "Creating users..."
 10.times do
   user_serialized = open(url).read
   user_hash = JSON.parse(user_serialized)["results"][0]
@@ -77,12 +80,14 @@ beaches.each { |beach| Beach.create!(beach)}
     email: user_hash["email"],
     password: "password",
     password_confirmation: "password",
-    profile_photo: user_hash["picture"]["large"],
+    # profile_photo: user_hash["picture"]["large"],
     description: Faker::MostInterestingManInTheWorld.quote,
     mobile: user_hash["cell"]
   }
 
-  User.create!(user)
+  new_user = User.new(user)
+  new_user.remote_profile_photo_url = user_hash["picture"]["large"]
+  new_user.save!
 end
 
 @surfboard_photos = [
@@ -101,6 +106,7 @@ end
 beachez = Beach.all
 userz = User.all
 
+puts "Creating boards..."
 @surfboard_photos.each do |photo|
   random_number = 20
 
@@ -128,21 +134,21 @@ end
 
 @surfboardz = Surfboard.all
 
+puts "Creating bookings..."
 10.times do
+  booking_hash = [{
+    surfboard: @surfboardz.sample,
+    user: userz.sample,
+    duration: Booking.durations.keys.sample,
+    rented_on: Date.today + rand(1..5),
+    status: Booking.statuses.keys.sample
+    }]
 
-booking_hash = [{
-  surfboard: @surfboardz.sample,
-  user: userz.sample,
-  duration: Booking.durations.keys.sample,
-  rented_on: Date.today + rand(1..5),
-  status: Booking.statuses.keys.sample
-  }]
-
-Booking.create!(booking_hash)
-
+  Booking.create!(booking_hash)
 end
 
 
+puts "Creating test cases..."
 # test user, booking and board
 test_user_hash = {
   first_name: "John",
@@ -155,7 +161,9 @@ test_user_hash = {
   # mobile: user_hash["cell"]
 }
 
-test_user = User.create!(test_user_hash)
+test_user = User.new(test_user_hash)
+test_user.remote_profile_photo_url = 'https://randomuser.me/api/portraits/men/37.jpg'
+test_user.save!
 
 random_number = 20
 
@@ -167,7 +175,7 @@ end
 test_board_hash = {
   # photo: photo,
   beach: Beach.all.sample,
-  name: Faker::BackToTheFuture.character,
+  name: Faker::Lovecraft.tome,
   description: Faker::SiliconValley.motto,
   price_hash: price_hash,
   address:  @addresses.sample,
