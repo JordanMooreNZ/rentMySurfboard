@@ -4,10 +4,12 @@ class SurfboardsController < ApplicationController
   # GET /surfboards
   # GET /surfboards.json
   def index
+    params[:filters] ||= {date: Date.today}
     @beaches = Beach.all
     @surfboards = Surfboard.where(nil)
-    @surfboards = @surfboards.where(beach_id: params[:filters][:beach]) if params[:filters][:beach]
+    @surfboards = @surfboards.where(beach_id: params[:filters][:beach]) if !!params[:filters][:beach]
     @surfboards = policy_scope(@surfboards).order(created_at: :desc)
+    @surfboards = @surfboards.select { |s| s.available_on?(params[:filters][:date]) }
 
     @markers = @surfboards.map do |surfboard|
       {

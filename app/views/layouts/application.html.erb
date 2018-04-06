@@ -16,11 +16,14 @@
     <% else %>
       <%= render "shared/navbar_not_signed_in" %>
     <% end %>
+    <% if !!notice %>
+      <p class="notice"><%= notice %></p>
+    <% elsif !!alert %>
+      <p class="alert"><%= alert %></p>
+    <% end %>
 
     <%= yield %>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
     <%= render "shared/footer" %>
     <%= javascript_include_tag 'application' %>
     <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_BROWSER_KEY']}" %>

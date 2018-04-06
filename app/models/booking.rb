@@ -16,4 +16,6 @@ class Booking < ApplicationRecord
     declined: "Declined",
     cancelled: "Cancelled"
   }
+
+  scope :rented_on, lambda { |date| where(rented_on: date, status: 'confirmed').where.not(duration: 'one_hour') }
 end
