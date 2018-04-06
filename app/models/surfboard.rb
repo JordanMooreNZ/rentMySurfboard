@@ -21,6 +21,10 @@ class Surfboard < ApplicationRecord
     board_skimmer: "Board Skimmer"
   }
 
+  def available_on?(date)
+    bookings.rented_on(date).empty?
+  end
+
   private
 
   def cancel_bookings
