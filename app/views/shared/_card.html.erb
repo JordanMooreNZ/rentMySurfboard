@@ -34,6 +34,8 @@
         <p><strong>Description:</strong></p><p>  <%= surfboard.description %>.</p>
       </div>
 
+      <%= render "bookings/form", surfboard: surfboard, booking: Booking.new%>
+
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary">Book Now!</button>
