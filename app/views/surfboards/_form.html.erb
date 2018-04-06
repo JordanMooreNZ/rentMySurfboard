@@ -2,18 +2,26 @@
   <%= f.error_notification %>
   <div class="form-inputs">
     <%= f.input :photo %>
-    <%= f.association :beach %>
-    <%= f.input :name %>
-    <%= f.input :description %>
+    <%= f.association :beach, include_blank: "Select from the Dropdown" %>
+    <div class="row">
+      <div class= "col-lg-6">
+      <%= f.input :name, placeholder: 'Name the Board using Height, Fins and Category' %>
+      </div>
+      <div class="col-lg-6">
+      <%= f.input :board_type, collection: Surfboard.board_types.invert, include_blank: "Select from the Dropdown" %>
+      </div>
+    </div>
+    <%= f.input :description, placeholder: 'Describe who would be the perfect rider of your Board'  %>
+    <div class="row">
     <%= f.simple_fields_for :price_hash, OpenStruct.new(@surfboard.price_hash) do |ff| %>
       <% Booking.durations.keys.each do |duration| %>
-        <%= ff.input duration.to_sym %>
+        <div class="col-lg-2"><%= ff.input duration.to_sym, placeholder: 'Price in $AUD' %></div>
       <% end %>
     <% end %>
+    </div>
     <!-- <%= f.input :price_hash %> -->
     <%= f.input :address %>
     <%= f.association :user, :as => :hidden, :input_html => { :value => @current_user.id } %>
-    <%= f.input :board_type, collection: Surfboard.board_types %>
     <%= f.input :available %>
   </div>
 

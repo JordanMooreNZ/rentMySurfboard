@@ -44,7 +44,7 @@ class SurfboardsController < ApplicationController
 
     respond_to do |format|
       if @surfboard.save!
-        format.html { redirect_to @surfboard, notice: 'Surfboard was successfully created.' }
+        format.html { redirect_to my_boards_surfboards_path, notice: 'Surfboard was successfully created.' }
         format.json { render :show, status: :created, location: @surfboard }
       else
         format.html { render :new }

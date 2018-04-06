@@ -1,11 +1,13 @@
 <div class="booking">
   <img class="img-small" src="<%= booking.surfboard.photo %>">
   <div class="booking-name">
-    <h3><%= booking.user.first_name + " " + booking.user.last_name %></h3>
-    <p><%= booking.rented_on %></p>
+    <h3><%= booking.surfboard.user.first_name + " " + booking.surfboard.user.last_name %></h3>
+    <p><%= booking.rented_on %> <br>
+    <%= Booking.durations[booking.duration] %> <br>
+    $<%=  booking.surfboard.price_hash[booking.duration] %></p>
   </div>
   <div class="booking-body">
-    <p><strong>Name: </strong><%=  booking.surfboard.user.first_name + " " + booking.surfboard.user.last_name %></p>
+    <p><strong>Name: </strong><%=  booking.user.first_name + " " + booking.user.last_name %></p>
     <p><strong>Address: </strong><%=  booking.surfboard.address %></p>
     <p><strong>Mobile: </strong><%=  booking.surfboard.user.mobile %></p>
   </div>

@@ -1,6 +1,6 @@
 import "bootstrap";
-import { autocomplete } from '../components/autocomplete';
 import { generateMap } from '../components/map';
+import { autocomplete } from '../components/autocomplete';
 
 generateMap()
 autocomplete()

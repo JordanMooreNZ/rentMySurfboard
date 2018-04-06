@@ -11,14 +11,18 @@
     <strong><h3><%= surfboard.name %></h3></strong>
 <!--     <p>$<%= surfboard.price_hash["four_hours"] %> for Four Hours</p> -->
     <p><strong>Description:</strong><br><%= surfboard.description %>.</p>
-    <div class="form-inputs">
-      <%= f.input :rented_on, label: 'Rent On', start_year: Date.today.year, order: [:day, :month, :year] %>
-      <%= f.input :duration, collection: duration_options(surfboard), include_blank: false %>
-    </div>
+    <% if current_user != surfboard.user %>
+      <div class="form-inputs">
+        <%= f.input :rented_on, label: 'Rent On', start_year: Date.today.year, order: [:day, :month, :year] %>
+        <%= f.input :duration, collection: duration_options(surfboard), include_blank: false %>
+      </div>
+    <% end %>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <%= f.button :submit, class: "btn btn-primary", value: "Book now" %>
+    <% if current_user != surfboard.user %>
+      <%= f.button :submit, class: "btn btn-primary", value: "Book now" %>
+    <% end %>
     <!-- <button type="button" class="btn btn-primary">Book Now!</button> -->
   </div>
 <% end %>
