@@ -1,10 +1,25 @@
-<%= simple_form_for([@surfboard, @booking]) do |f| %>
-  <%= f.error_notification %>
-  <div class="form-inputs">
-    <%= f.input :rented_on, start_year: Date.today.year, order: [:day, :month, :year] %>
-    <%= f.input :duration, collection: Booking.durations.invert, include_blank: false %>
+<%= simple_form_for([surfboard, booking]) do |f| %>
+  <div class="modal-body">
+    <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= surfboard.photo %>);">
+      <div class="card-category"></div>
+      <div class="card-description">
+        <h2><%= surfboard.board_type.capitalize %></h2>
+      </div>
+      <div class="card-modal">
+    </div>
+    </div>
+    <strong><h3><%= surfboard.name %></h3></strong>
+<!--     <p>$<%= surfboard.price_hash["four_hours"] %> for Four Hours</p> -->
+    <p><strong>Description:</strong><br><%= surfboard.description %>.</p>
+    <div class="form-inputs">
+      <%= f.input :rented_on, label: 'Rent On', start_year: Date.today.year, order: [:day, :month, :year] %>
+      <%= f.input :duration, collection: duration_options(surfboard), include_blank: false %>
+    </div>
   </div>
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <%= f.button :submit, class: "btn btn-primary", value: "Book now" %>
+    <!-- <button type="button" class="btn btn-primary">Book Now!</button> -->
   </div>
 <% end %>
+

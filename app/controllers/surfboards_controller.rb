@@ -5,8 +5,9 @@ class SurfboardsController < ApplicationController
   # GET /surfboards.json
   def index
     @beaches = Beach.all
-    @filters = params[:filters]
-    @surfboards = policy_scope(Surfboard).order(created_at: :desc)
+    @surfboards = Surfboard.where(nil)
+    @surfboards = @surfboards.where(beach_id: params[:filters][:beach]) if params[:filters][:beach]
+    @surfboards = policy_scope(@surfboards).order(created_at: :desc)
 
     @markers = @surfboards.map do |surfboard|
       {
@@ -35,9 +36,7 @@ class SurfboardsController < ApplicationController
   # POST /surfboards
   # POST /surfboards.json
   def create
-    surf_hash = surfboard_params
-    surf_hash[:price_hash] = permit_durations
-    @surfboard = Surfboard.new(surf_hash)
+    @surfboard = Surfboard.new(surfboard_params)
 
     authorize @surfboard
 
@@ -87,13 +86,10 @@ class SurfboardsController < ApplicationController
     authorize @surfboard
   end
 
-  def permit_durations
-    params.require(:surfboard).require(:price_hash).permit(Booking.durations.keys.map{ |e| e.to_sym })
-  end
   # @full_params = [:photo, :beach_id, :beach, :name, :price_hash, :description, :address, :user_id, :board_type, :available]
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def surfboard_params
-    params.require(:surfboard).permit(:photo, :beach_id, :name, :price_hash, :description, :address, :user_id, :board_type, :available)
+    params.require(:surfboard).permit(:photo, :beach_id, :name, :description, :address, :user_id, :board_type, :available, price_hash: {})
   end
 end

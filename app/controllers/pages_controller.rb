@@ -3,5 +3,6 @@ class PagesController < ApplicationController
 
   def home
     @beaches = Beach.all
+    params[:filters] ||= {}
   end
 end
