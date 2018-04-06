@@ -1,0 +1,14 @@
+<form action="/surfboards" method="get" class="form-inline">
+
+      <div class="form-group">
+
+        <%= select_tag "filters[beach]", options_from_collection_for_select(@beaches, "id", "name", selected: params[:filters][:beach]), class: "form-control" %>
+
+      </div>
+      <div class="form-group">
+       <input type="date" name="filters[date]" max="3000-12-31"
+              min="<%= Date.today %>" class="form-control" value="<%= params[:filters][:date] %>">
+      </div>
+
+      <input type="submit" class="btn btn-primary">
+    </form>

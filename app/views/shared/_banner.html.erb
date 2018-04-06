@@ -2,21 +2,6 @@
   <div class="banner-content">
     <h1>Surf's Up Dude!</h1>
     <p>Let us help you rent a Board. Whuppa!</p>
-    <form action="/surfboards" method="get" class="form-inline">
-
-      <div class="form-group">
-        <select class="form-control" name="filters[beach]" id="exampleFormControlSelect1">
-          <% @beaches.each do |beach| %>
-            <option><%= beach.name %></option>
-          <% end %>
-        </select>
-      </div>
-      <div class="form-group">
-       <input type="date" name="filters[surf-date]" max="3000-12-31"
-              min="1000-01-01" class="form-control">
-      </div>
-
-      <input type="submit" class="btn btn-primary">
-    </form>
+    <%= render 'shared/search_form' %>
   </div>
 </div>

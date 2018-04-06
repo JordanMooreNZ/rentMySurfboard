@@ -5,8 +5,9 @@ class SurfboardsController < ApplicationController
   # GET /surfboards.json
   def index
     @beaches = Beach.all
-    @filters = params[:filters]
-    @surfboards = policy_scope(Surfboard).order(created_at: :desc)
+    @surfboards = Surfboard.where(nil)
+    @surfboards = @surfboards.where(beach_id: params[:filters][:beach]) if params[:filters][:beach]
+    @surfboards = policy_scope(@surfboards).order(created_at: :desc)
 
     @markers = @surfboards.map do |surfboard|
       {

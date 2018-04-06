@@ -17,6 +17,7 @@ gem "geocoder"
 
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass', '~> 3.3'
+#gem 'bootstrap', '~> 4.0.0'
 gem 'font-awesome-sass'
 gem 'sass-rails'
 gem 'jquery-rails'
