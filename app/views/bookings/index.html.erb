@@ -1,15 +1,7 @@
-<%= @bookings.count %>
-<% @bookings.each do |booking|%>
-  <p><%= booking.surfboard.user.email %></p>
-  <p><%= booking.duration %></p>
-  <%= simple_form_for([booking.surfboard, booking]) do |f| %>
-    <%= f.error_notification %>
-    <div class="form-inputs">
-      <%= f.input :status, collection: Booking.statuses.invert, include_blank: false %>
-    </div>
-    <div class="form-actions">
-      <%= f.button :submit %>
-    </div>
-    <br>
+<div class="container">
+  <h1>Your Bookings</h1>
+
+  <% @bookings.each do |booking|%>
+    <%= render "booking_card", booking: booking%>
   <% end %>
-<% end %>
+</div>
