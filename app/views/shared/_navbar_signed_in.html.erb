@@ -15,7 +15,7 @@
       <div class="dropdown">
         <img src= "<%= current_user.profile_photo %>" class="avatar dropdown-toggle" id="navbar-wagon-menu" data-toggle="dropdown">
         <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-          <li class="dropdown-item"><%= link_to 'Log Out', destroy_user_session_path %></li>
+          <li class="dropdown-item"><%= link_to 'Log Out', destroy_user_session_path, method: :delete %></li>
         </ul>
       </div>
     </div>

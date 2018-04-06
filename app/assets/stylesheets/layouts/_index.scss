@@ -3,3 +3,7 @@
 // @import "dashboard";
 // @import "profile";
 // @import "map";
+
+.container, .fluid-container {
+  min-height: 600px;
+}

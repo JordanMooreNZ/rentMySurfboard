@@ -25,6 +25,10 @@ class Surfboard < ApplicationRecord
     bookings.rented_on(date).empty?
   end
 
+  def board_label
+    Surfboard.board_types[board_type]
+  end
+
   private
 
   def cancel_bookings

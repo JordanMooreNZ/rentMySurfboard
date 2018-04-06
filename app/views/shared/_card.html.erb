@@ -1,7 +1,7 @@
 <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= surfboard.photo %>);">
   <div class="card-category"><h2>$<%= surfboard.price_hash["four_hours"] %></h2><h4>P/4H</h4></div>
   <div class="card-description">
-    <h2><%= surfboard.board_type.capitalize %></h2>
+    <h2><%= surfboard.board_label %></h2>
     <p><%= surfboard.name %></p>
   </div>
   <div class="card-modal">
