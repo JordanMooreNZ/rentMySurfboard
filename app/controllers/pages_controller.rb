@@ -3,6 +3,6 @@ class PagesController < ApplicationController
 
   def home
     @beaches = Beach.all
-    params[:filters] ||= {}
+    params[:filters] ||= {date: Date.today}
   end
 end
