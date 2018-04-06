@@ -20,24 +20,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%= surfboard.photo %>);">
-          <div class="card-category"></div>
-          <div class="card-description">
-            <h2><%= surfboard.board_type.capitalize %></h2>
-          </div>
-          <div class="card-modal">
-        </div>
-        </div>
-        <strong><h3><%= surfboard.name %></h3></strong>
-        $<%= surfboard.price_hash["four_hours"] %> for Four Hours<br>
-        <p><strong>Description:</strong></p><p>  <%= surfboard.description %>.</p>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Book Now!</button>
-      </div>
+      <%= render "bookings/form", surfboard: surfboard, booking: Booking.new%>
     </div>
   </div>
 </div>
